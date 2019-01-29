@@ -1,0 +1,42 @@
+version : '2'
+services :
+  php:
+    container_name: php53-fpm
+    build: ./build/php 
+    working_dir: "/var/www"
+    volumes:
+        - ./www/:/var/www
+    expose:
+      - "9000"
+
+  mysql:
+    container_name: mysql
+    image: mysql:5.6
+    environment:
+        MYSQL_ROOT_PASSWORD: rootdocker
+    volumes:
+        - ./db/:/var/lib/mysql
+    ports:
+      - 3306:3306
+      
+  apache:
+    container_name: apache
+    build: './build/apache/'
+    depends_on:
+      - php
+      - mysql
+    ports:
+      - "80:80"
+    volumes:
+      - ./www/:/var/www/html
+      - ./conf/:/usr/local/apache2/conf
+      - ./logs/:/var/log/
+
+  pma:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+        PMA_HOST : mysql
+    ports:
+      - "8000:80"
