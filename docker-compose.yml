@@ -2,7 +2,7 @@ version : '2'
 services :
   php:
     container_name: php53-fpm
-    build: ./build/php 
+    image : songwutk/php53-fpm
     working_dir: "/var/www"
     volumes:
         - ./www/:/var/www
