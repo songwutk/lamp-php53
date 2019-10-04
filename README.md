@@ -27,8 +27,12 @@ Directory Structure
 You can trace sql log by query .. 
 
 >SET GLOBAL general_log=OFF;
+
 >TRUNCATE table mysql.general_log;
+
 >SET GLOBAL log_output = 'TABLE';
+
 >SET GLOBAL general_log=ON;
+
 
 Open table mysql->general_log to view sql log.
