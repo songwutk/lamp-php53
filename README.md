@@ -14,3 +14,18 @@ logs - apache log
 www - web data 
 
 docker-compose.yml
+
+
+
+Instruction : docker-compose up -d 
+
+Why choose mariadb ?
+
+You can trace sql log by query .. 
+
+SET GLOBAL general_log=OFF;
+TRUNCATE table mysql.general_log;
+SET GLOBAL log_output = 'TABLE';
+SET GLOBAL general_log=ON;
+
+Open table mysql->general_log to view sql log.
